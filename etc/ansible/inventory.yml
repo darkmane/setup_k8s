@@ -2,11 +2,10 @@ all:
   children:
     fresh:
       hosts:
-        new-ship
+        new-ship:
     control_plane:
       hosts:
-        controller01
+        controller01:
     workers:
       hosts:
-        worker001
-        worker002
+        worker[001:002]:

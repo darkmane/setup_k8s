@@ -1,0 +1,9 @@
+---
+- hosts: control_plane
+  become: true
+  tasks:
+# Step 2.4: Initialize the Kubernetes cluster with kubeadm using the 
+# below code (applicable only on the control plane).
+  - name: Reset the control_plane
+    command: kubeadm reset
+

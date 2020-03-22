@@ -199,6 +199,12 @@ write_files:
       #	PermitTTY no
       #	ForceCommand cvs server
     path: /etc/ssh/sshd_config
+
+# Mount points
+mounts:
+- [ swap, null ] # Removing default swap mount because kubelet does not run with swap enabled
+- [ /dev/sda1, /opt/data, "ext4", "defaults", "0", "1" ] # Adding an USB drive, remove if you are not attaching one
+
 # These commands will be ran once on first boot only
 runcmd:
   # Pickup the hostname changes

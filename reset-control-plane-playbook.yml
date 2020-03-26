@@ -4,6 +4,50 @@
   tasks:
 # Step 2.4: Initialize the Kubernetes cluster with kubeadm using the 
 # below code (applicable only on the control plane).
-  - name: Reset the control_plane
-    command: kubeadm reset
+  - name: Reset kubeadm
+    command: kubeadm reset -f
+  - name: Remove Kubernetes binaries
+    apt: 
+      name: "{{ packages }}"
+      state: absent
+      update_cache: yes
+    vars:
+      packages:
+        - kubelet 
+        - kubeadm 
+        - kubectl
+  - name: Stop Docker
+    systemd:
+      state: stopped
+      name: docker
+  - name: Remove docker and its dependecies
+    apt: 
+      name: "{{ packages }}"
+      state: absent
+      update_cache: yes
+    vars:
+      packages:
+      - docker-ce 
+      - docker-ce-cli 
+      - containerd.io
+
+  - name: Add apt repository for stable version
+    apt_repository:
+      repo: deb [arch=arm64] https://download.docker.com/linux/ubuntu xenial stable
+      state: absent
+
+  - name: Removing apt repository for Kubernetes
+    apt_repository:
+      repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+      state: absent
+      filename: kubernetes.list
+
+
+  - name: Remove vagrant user to docker group
+    user:
+      name: vagrant
+      group: docker
+      state: absent
+      remove: yes
+
 

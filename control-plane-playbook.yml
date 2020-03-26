@@ -82,21 +82,25 @@
       name: kubelet
       daemon_reload: yes
       state: restarted
+  - name: Start Docker
+    systemd:
+      state: started
+      name: docker
 # Step 2.4: Initialize the Kubernetes cluster with kubeadm using the 
 # below code (applicable only on the control plane).
   - name: Initialize the Kubernetes cluster using kubeadm
-    command: kubeadm init --pod-network-cidr 10.244.0.0/16
+    command: kubeadm init --v=5 --pod-network-cidr 10.244.0.0/16
 # Step 2.5: Setup the kube config file for the user to access the Kubernetes cluster using the below code.
   - name: Setup kubeconfig for vagrant user
     command: "{{ item }}"
     with_items:
-    - mkdir -p $USER/.kube
-    - cp -i /etc/kubernetes/admin.conf $USER/.kube/config
-    - chown $USER:$USER $USER/.kube/config
+    - mkdir -p /home/vagrant/.kube
+    - cp -i /etc/kubernetes/admin.conf /home/vagrant/.kube/config
+    - chown vagrant /home/vagrant/.kube/config
 # Step 2.6: Setup the container networking provider and the network policy engine using the below code.
   - name: Install calico pod network
     become: false
-    command: kubectl create -f https://raw.githubusercontent.com/coreos/flannel/v0.12.0/Documentation/kube-flannel.yml
+    command: kubectl --kubeconfig=/home/darkmane/.kube/config create -f https://raw.githubusercontent.com/coreos/flannel/v0.12.0/Documentation/kube-flannel.yml
 # Step 2.7: Generate kube join command for joining the node to the Kubernetes cluster and store the command in the file named join-command.
   - name: Generate join command
     command: kubeadm token create --print-join-command

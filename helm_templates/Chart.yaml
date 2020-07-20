@@ -1,0 +1,11 @@
+apiVersion: v1
+description: A Helm chart for setting up DNS that can integrate with external DNS systems (Like Pihole)
+name: setup_k8s_dns
+version: v1.1.2
+home: https://github.com/darkmane/setup_k8s
+sources:
+  - https://github.com/darkmane/setup_k8s
+keywords:
+  - dns
+  - traefik
+  - powerdns

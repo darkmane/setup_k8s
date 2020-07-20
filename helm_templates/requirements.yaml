@@ -1,0 +1,10 @@
+dependencies:
+  - name: powerdns
+    version: 0.1.7
+    repository: https://raw.githubusercontent.com/aescanero/helm-charts/master/
+  - name: metallb
+    version: 0.8.1
+    repository: https://kubernetes-charts.storage.googleapis.com
+  - name: traefik
+    version: 1.87.2
+    repository: https://kubernetes-charts.storage.googleapis.com

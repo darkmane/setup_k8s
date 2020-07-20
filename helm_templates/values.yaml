@@ -1,0 +1,9 @@
+traefik:
+    namespace: traefik
+powerdns:
+    namespace: powerdns
+    mariadb:
+        persistence:
+            enabled: false 
+metallb:
+    namespace: metallb-system

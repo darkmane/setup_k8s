@@ -1,3 +1,0 @@
----
-  - import_playbook: roles/common/main.yml
-  - import_playbook: roles/worker/main.yml

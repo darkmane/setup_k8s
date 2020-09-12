@@ -1,0 +1,9 @@
+---
+- hosts: workers
+  tasks:
+    - name: Basic Setup
+      import_tasks: roles/common/main.yml
+    - name: Controller Setup
+      import_tasks: roles/control-plane/main.yml
+    - name: Join Command
+      import_tasks: roles/control-plane/join.yml

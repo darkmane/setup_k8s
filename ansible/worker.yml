@@ -1,0 +1,6 @@
+- hosts: workers
+  tasks:
+    - name: Basic Setup
+      import_tasks: roles/common/main.yml
+    - name: Worker Setup
+      import_tasks: roles/worker/main.yml

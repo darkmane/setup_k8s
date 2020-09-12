@@ -1,8 +1,5 @@
 all:
   children:
-    fresh:
-      hosts:
-        new-ship
     control_plane:
       hosts:
         controller01

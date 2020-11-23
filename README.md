@@ -9,12 +9,13 @@ The basic process is download a Ubuntu pre-installed server image [19.10](http:/
 
 ## Download Image
 Choose the version of Ubuntu Server you want to run [18.04.4 LTS](http://cdimage.ubuntu.com/releases/18.04.4/release/ubuntu-18.04.4-preinstalled-server-arm64+raspi3.img.xz) [19.10](http://cdimage.ubuntu.com/releases/19.10/release/ubuntu-19.10.1-preinstalled-server-arm64+raspi3.img.xz)
+[20.10](http://cdimage.ubuntu.com/releases/20.10/release/ubuntu-20.10-preinstalled-server-arm64+raspi.img.xz)
 1. Download the image
 1. Start [balenaEtcher](https://www.balena.io/etcher/)
 1. Select the image, drive, and presh flash
 
 ## Customize the microSD card
-1. Copy nobtcmd.txt to the microSD card. This enables cgroup_memory which is required by Kubernetes.
+1. Copy nobtcmd.txt to the microSD card. This enables cgroup_memory which is required by Kubernetes. If you upgrade to Ubuntu 20.04, over write cmdline.txt with nobtcmd.txt
 1. Copy user-data to the microSD card, it will configure your OS on first boot. Adding the user account, configuring sshd to only allow authentication via public key.
 
 ## Update your inventory.yml

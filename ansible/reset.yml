@@ -1,5 +1,5 @@
 ---
-- hosts: control_plane
+- hosts: all
   become: true
   tasks:
 # Step 2.4: Initialize the Kubernetes cluster with kubeadm using the 

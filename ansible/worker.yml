@@ -4,3 +4,6 @@
       import_tasks: roles/common/main.yml
     - name: Worker Setup
       import_tasks: roles/worker/main.yml
+  handlers:
+    - name: docker status
+      service: name=docker state=started

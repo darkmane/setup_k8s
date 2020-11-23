@@ -1,6 +1,7 @@
 ---
 # Step 2.1: Install Docker and its dependent components.
 - name: Install packages that allow apt to be used over HTTPS
+  become: yes
   apt:
     name: "{{ packages }}"
     state: present
@@ -13,16 +14,19 @@
     - gnupg-agent
     - software-properties-common
 - name: Add an apt signing key for Docker
+  become: yes
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
 
 - name: Add apt repository for stable version
+  become: yes
   apt_repository:
     repo: deb [arch=arm64] https://download.docker.com/linux/ubuntu xenial stable
     state: present
 
 - name: Install docker and its dependecies
+  become: yes
   apt: 
     name: "{{ packages }}"
     state: present
@@ -36,6 +40,7 @@
     - docker status
 
 - name: Add vagrant user to docker group
+  become: yes
   user:
     name: vagrant
     group: docker
@@ -53,17 +58,20 @@
   command: swapoff -a
   when: ansible_swaptotal_mb > 0
 - name: Add an apt signing key for Kubernetes
+  become: true
   apt_key:
     url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
     state: present
 # Step 2.3: Installing kubelet, kubeadm and kubectl using the below code.
 - name: Adding apt repository for Kubernetes
+  become: yes
   apt_repository:
     repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
     state: present
     filename: kubernetes.list
 
 - name: Install Kubernetes binaries
+  become: yes
   apt: 
     name: "{{ packages }}"
     state: present
@@ -75,11 +83,13 @@
       - kubectl
 
 - name: Restart kubelet
+  become: yes
   service:
     name: kubelet
     daemon_reload: yes
     state: restarted
 - name: Start Docker
+  become: yes
   systemd:
     state: started
     name: docker

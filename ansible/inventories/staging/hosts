@@ -1,9 +1,9 @@
 all:
   children:
-    control_plane:
+    controllers:
       hosts:
-        controller01
+        controller01:
     workers:
       hosts:
-        worker001
-        worker002
+        worker001:
+        worker002:

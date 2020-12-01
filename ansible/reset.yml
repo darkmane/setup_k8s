@@ -1,11 +1,16 @@
 ---
-- hosts: control_plane
+- hosts: all
   become: true
   tasks:
 # Step 2.4: Initialize the Kubernetes cluster with kubeadm using the 
 # below code (applicable only on the control plane).
+  - name: Check for kubeadm
+    shell: "which kubeadm"
+    register: kubeadm_check
+    ignore_errors: true
   - name: Reset kubeadm
     command: kubeadm reset -f
+    when: kubeadm_check == 0
   - name: Remove Kubernetes binaries
     apt: 
       name: "{{ packages }}"

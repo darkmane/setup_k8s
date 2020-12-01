@@ -7,3 +7,5 @@ all:
       hosts:
         worker001:
         worker002:
+        worker003:
+

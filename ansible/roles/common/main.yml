@@ -93,3 +93,7 @@
   systemd:
     state: started
     name: docker
+- name: Change iptables default rule
+  iptables:
+    chain: FORWARD
+    jump: ACCEPT
